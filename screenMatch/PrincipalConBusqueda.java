@@ -18,30 +18,34 @@ public class PrincipalConBusqueda {
         var pelicula = userInput.nextLine();
 
         String link = "https://www.omdbapi.com/?t=" +pelicula+ "&apikey=504a5966";
-
-        HttpClient client = HttpClient.newHttpClient();
-        HttpRequest request = HttpRequest.newBuilder()
-        .uri(URI.create(link))
-        .build();
-
-        HttpResponse<String> response = client
-                .send(request, HttpResponse.BodyHandlers.ofString());
-
-        String json = response.body();
-        System.out.println(response.body());
-
-        Gson gson = new GsonBuilder()
-                .setFieldNamingPolicy(FieldNamingPolicy.UPPER_CAMEL_CASE)
-                .create();
-        //Titulo miTitulo = gson.fromJson(json, Titulo.class);
-        TituloOMDB miTituloOMDB = gson.fromJson(json, TituloOMDB.class);
-        System.out.println(miTituloOMDB);
         try{
+            HttpClient client = HttpClient.newHttpClient();
+            HttpRequest request = HttpRequest.newBuilder()
+            .uri(URI.create(link))
+            .build();
+
+            HttpResponse<String> response = client
+                    .send(request, HttpResponse.BodyHandlers.ofString());
+
+            String json = response.body();
+            System.out.println(response.body());
+
+            Gson gson = new GsonBuilder()
+                    .setFieldNamingPolicy(FieldNamingPolicy.UPPER_CAMEL_CASE)
+                    .create();
+            //Titulo miTitulo = gson.fromJson(json, Titulo.class);
+            TituloOMDB miTituloOMDB = gson.fromJson(json, TituloOMDB.class);
+            System.out.println(miTituloOMDB);
+
             Titulo miTitulo = new Titulo(miTituloOMDB);
-            System.out.println(miTitulo);
+            System.out.println("Titulo ya convertido: " + miTitulo);
         }catch (NumberFormatException e){
             System.out.println("Ocurrió un error: ");
             System.out.println(e.getMessage());
+        }catch (IllegalArgumentException e){
+            System.out.println("Error en la URI, verifique la dirección");
+        }catch (Exception e){
+            System.out.println("Ocurrió un error inesperado");
         }
         System.out.println("Finalizó la ejecución del programa");
     }
