@@ -1,4 +1,4 @@
-package com.aluracursos.screenmatch;
+/*package com.aluracursos.screenmatch;
 
 import com.aluracursos.screenmatch.principal.Principal;
 import com.aluracursos.screenmatch.repository.SerieRepository;
@@ -28,11 +28,11 @@ public class ScreenmatchApplicationConsola implements CommandLineRunner {
 		json = consumoApi.obtenerDatos("https://www.omdbapi.com/?t=game+of+thrones&Season=1&episode=1&apikey=504a5966");
 		DatosEpisodio episodios = conversor.obtenerDatos(json, DatosEpisodio.class);
 		System.out.println(episodios);*/
-		Principal principal = new Principal(repository);
+		/*Principal principal = new Principal(repository);
 		principal.muestraElMenu();
 
 		//EjemploStreams ejemploStreams = new EjemploStreams();
 		//ejemploStreams.muestraEjemplo();
 
 	}
-}
+}*/
