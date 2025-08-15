@@ -1,5 +1,6 @@
 package com.aluracursos.screenmatch.repository;
 
+import com.aluracursos.screenmatch.dto.EpisodioDTO;
 import com.aluracursos.screenmatch.model.Categoria;
 import com.aluracursos.screenmatch.model.Episodio;
 import com.aluracursos.screenmatch.model.Serie;
@@ -43,4 +44,10 @@ public interface SerieRepository extends JpaRepository<Serie, Long> {
            "GROUP BY s\n" +
            "ORDER BY MAX(e.fechaDeLanzamiento) DESC LIMIT 5")
    List<Serie> lanzamientosMasRecientes();
+
+   @Query("SELECT e FROM Serie s\n" +
+           "JOIN s.episodios e\n" +
+           "WHERE s.id = :id \n" +
+           "AND e.temporada = :numeroTemporada")
+   List<Episodio> obtenerTemporadasPorNumero(long id, long numeroTemporada);
 }
